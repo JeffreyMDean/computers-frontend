@@ -10,8 +10,8 @@ export function Content() {
  const handleIndexComputers = () => {  // fetches list of computers from url
   console.log("handleIndexComputers");
   axios.get("http://localhost:3000/computers.json").then((response) => {
-    console.log(response.data);
-    setComputers(response.data); //  resets computers array to response.data (and r.d is an array)
+    console.log(response.data); //r.d. data returned from the server (array of compueters)
+    setComputers(response.data); //updates the computers state with the data received from the server
   });
  };
 
@@ -28,7 +28,7 @@ export function Content() {
 
   return (          // specififes the JSX to be rendered by the Content component
     <div>
-      <ComputersNew onCreateComputer={handleCreateComputer} />
+      <ComputersNew onCreateComputer={handleCreateComputer} />  
       <ComputersIndex computers={computers} />  
     </div>
   );
@@ -39,3 +39,8 @@ export function Content() {
 // computers={computers} prop being passed to the ComputersIndex component
 // This means the computers array defined in the Content component is being sent to the ComputersIndex component as a prop named computers
 // so <computersIndex is the React component that is rendered and will look for the ComputersIndex component, computers is the name of the prop being passed into ComputersIndex (it is an attribute of ComputersIndex), and {computers} is defined as what is stored in the const computers variable...so it is the value of the computers prop
+
+// Content component passes handleCreateComputer function as a prop names onCreateComputer to the ComputersNew component thus allowing ComputersNew to handle form submissions and update the list of computers
+
+// export allows a component or function to be made available for import in another file, but it does not affect how the component recieves props
+// a component receives props from its parent component
